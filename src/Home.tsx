@@ -16,7 +16,7 @@ export const Home: React.FC<IHomeProps> = () => {
         name: 'file',
         multiple: false,
         withCredentials: false,
-        action: 'http://127.0.0.1:8008/translate',
+        action: 'http://47.103.199.145:8008/translate',
         onChange (info) {
             const { status } = info.file;
             if (status !== 'uploading') {
