@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Upload, Icon, message, Alert } from 'antd';
 import {base64ToBlob, downloadFile} from "./utils";
-
+import 'antd/dist/antd.css'
 interface IHomeProps {}
+
 
 const StyledContainer = styled.div`
     .upload-wrap {
         padding-top: 20px;
     }
+
 `;
 
 export const Home: React.FC<IHomeProps> = () => {
@@ -25,7 +27,7 @@ export const Home: React.FC<IHomeProps> = () => {
                 const file = info.file;
                 if (file.response) {
                     if (file.response.errorCode === 0) {
-                        const fileName = file.name.replace('.xls', '-完成处理.xls');
+                        const fileName = file.name.replace('.xlsx', '-完成处理.xlsx');
                         const blob = base64ToBlob(file.response.payload, fileName);
                         downloadFile(blob, fileName);
                     } else {
@@ -36,7 +38,7 @@ export const Home: React.FC<IHomeProps> = () => {
             if (status === 'done') {
                 message.success('处理成功，请检查下载的表格文件');
             } else if (status === 'error') {
-                message.error(`${info.file.name} 上传失败，请检查xls文件.`);
+                message.error(`${info.file.name} 上传失败，请检查xlsx文件.`);
             }
             return true;
         }
@@ -57,7 +59,7 @@ export const Home: React.FC<IHomeProps> = () => {
                 <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                 </p>
-                <p className="ant-upload-text">将要处理的表格，拖到本区域，当前仅支持xls后缀</p>
+                <p className="ant-upload-text">将要处理的表格，拖到本区域，当前仅支持xlsx后缀</p>
                 <p className="ant-upload-hint">处理完成会自动下载，请耐心等待。</p>
             </Upload.Dragger>
         </div>
