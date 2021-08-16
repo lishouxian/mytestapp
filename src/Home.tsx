@@ -10,7 +10,6 @@ const StyledContainer = styled.div`
     .upload-wrap {
         padding-top: 20px;
     }
-
 `;
 
 export const Home: React.FC<IHomeProps> = () => {
@@ -48,7 +47,7 @@ export const Home: React.FC<IHomeProps> = () => {
         <Alert
             message={
                 <div>
-                    医学384pcr板数据处理工具，有问题请联系@无羡
+                    医学384pcr板数据处理工具，有问题请联系 CC98 @无羡
                 </div>
             }
             type="info"
@@ -59,7 +58,7 @@ export const Home: React.FC<IHomeProps> = () => {
                 <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                 </p>
-                <p className="ant-upload-text">将要处理的表格，拖到本区域，当前仅支持xlsx后缀</p>
+                <p className="ant-upload-text">将要处理的表格，拖到本区域</p>
                 <p className="ant-upload-hint">处理完成会自动下载，请耐心等待。</p>
             </Upload.Dragger>
         </div>
