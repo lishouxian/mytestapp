@@ -7,7 +7,7 @@ import 'antd/dist/antd.css'
 interface IHomeProps {
 }
 
-let imgUrl = 'https://gitee.com/lishouxian/blog-img/raw/master/2022-01/061.jpg';
+let imgUrl = 'https://lishouxianmail.oss-cn-hangzhou.aliyuncs.com/061.jpg';
 
 
 const StyledContainer = styled.div`
@@ -18,13 +18,30 @@ const StyledContainer = styled.div`
         padding-top: 20px;
         margin: auto;
         width: 100%;
-
-    }
+        padding-bottom: 20px;
+    },
     .img-wrap img {
         display: block;
         max-height: 500px;
         max-width: 100%;
         margin: auto;
+    },
+    .seg-wrap img {
+        display: block;
+        max-height: 500px;
+        max-width: 100%;
+        margin: auto;
+    },
+     .text-wrap {
+        text-align: center;
+        max-height: 500px;
+
+        max-width: 100%;
+        margin: auto;
+    },
+    .text-wrap p{
+        text-align: center;
+        font-size: 20px;
     }
 `;
 
@@ -33,7 +50,7 @@ export const Home: React.FC<IHomeProps> = () => {
         name: 'file',
         multiple: false,
         withCredentials: false,
-        action: 'http://10.11.111.42:8000/hello',
+        action: 'http://10.11.111.42:5000/resolve_img',
         onChange(info) {
             console.log(info.file.response);
             const {status} = info.file;
@@ -44,10 +61,11 @@ export const Home: React.FC<IHomeProps> = () => {
             const file = info.file;
             if (file.response) {
                 // @ts-ignore
-                document.getElementById('img-wrap').innerHTML = `<img src=${file.response.payload} className='img-class' alt={'sadsa'}/>`;
+                document.getElementById('img-wrap').innerHTML = `<img src=${file.response.img} className='img-class' alt={'识别结果'}/>`;
                 // @ts-ignore
-                // document.getElementById('img-wrap').getElementsByClassName('img-class').src = file.response.payload;
-                imgUrl = file.response.payload;
+                document.getElementById('text-wrap').innerHTML = `<p>识别成功种类为${file.response.cl}</p>`;
+                // @ts-ignore
+                document.getElementById('seg-wrap').innerHTML = `<img src=${file.response.seg} className='img-class' alt={'分割结果'}/>`;
             }
             return true;
         }
@@ -64,7 +82,7 @@ export const Home: React.FC<IHomeProps> = () => {
         />
 
         <div className="upload-wrap">
-            <Upload.Dragger {...props}>
+            <Upload.Dragger {...props}  maxCount={1}>
                 <p className="ant-upload-drag-icon">
                     <FileImageTwoTone />
                 </p>
@@ -77,6 +95,14 @@ export const Home: React.FC<IHomeProps> = () => {
         <div className="img-wrap" id="img-wrap">
             <img src={imgUrl} className='img-class' alt={'sadsa'}/>
         </div>
+
+        <div className="text-wrap" id="text-wrap">
+            <p>上述为轮毂示例</p>
+        </div>
+
+        <div className="seg-wrap" id="seg-wrap">
+        </div>
+
     </StyledContainer>;
 };
 
